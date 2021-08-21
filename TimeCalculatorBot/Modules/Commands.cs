@@ -21,6 +21,7 @@ namespace TimeCalculatorBot.Modules
         public async Task Now(string convert = null, [Remainder] string extraTimeZone = null)
         {
             if (convert != null) convert.ToLower();
+            var message = Context.Message.Content;
             string timeFormat = "HH:mm tt";
             DateTime cetTZ = DateTime.UtcNow.AddHours(1);
             string cetTZtring = cetTZ.ToString(timeFormat);
@@ -42,7 +43,7 @@ namespace TimeCalculatorBot.Modules
             string bstTZString = bstTZ.ToString(timeFormat);
             string bstTZString1 = "British Summer Time";
 
-            //To add: gmt+9, AEST, IST, AKDT, ARE, PST!
+            //To add: gmt+9, AEST, IST, AKDT, ARE, PST, GMT! and automatic...
 
 
 
@@ -69,6 +70,8 @@ namespace TimeCalculatorBot.Modules
                                 .WithText("!time now 24h");
                             });
                     Embed embed = EmbedBuilder.Build();
+
+                    if (Context.Message.Content.StartsWith("!time now")) await Context.Message.DeleteAsync();
                     await ReplyAsync(embed: embed);
 
                 }
@@ -108,6 +111,7 @@ namespace TimeCalculatorBot.Modules
                                             .WithText("!time now 12h");
                         });
                     Embed embed = EmbedBuilder.Build();
+                    if (Context.Message.Content.StartsWith("!time now")) await Context.Message.DeleteAsync();
                     await ReplyAsync(embed: embed);
                     //curTime = DateTime.Now.ToString(timeFormat, CultureInfo.CreateSpecificCulture("en-US"));
                     //await ReplyAsync($"The bot's currrent time is {curTime} {localTZ}.");
@@ -116,6 +120,7 @@ namespace TimeCalculatorBot.Modules
             } 
             else
             {
+                if (Context.Message.Content.StartsWith("!time now")) await Context.Message.DeleteAsync();
                 await ReplyAsync("Invaild sub command, Try with either '12', '12h', '12hour', '12hours', '12-hour', '12-hours', 'am', 'pm' or '24h'.");
             }
         }

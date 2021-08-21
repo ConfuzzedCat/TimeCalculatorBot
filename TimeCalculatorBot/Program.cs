@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Resources;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
@@ -26,7 +27,9 @@ namespace TimeCalculatorBot
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-            string token = "";
+
+            
+            string token = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + @"\Bot.Token");
 
             _client.Log += _client_Log;
 
@@ -36,7 +39,7 @@ namespace TimeCalculatorBot
 
             await _client.StartAsync();
 
-            await _client.SetGameAsync("Made by @ConfuzzedCat");
+            await _client.SetGameAsync("with @ConfuzzedCat");
 
             await Task.Delay(-1);
 
