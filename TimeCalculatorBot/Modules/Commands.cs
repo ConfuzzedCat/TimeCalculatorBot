@@ -121,8 +121,16 @@ namespace TimeCalculatorBot.Modules
         }
 
         [Command("time")]
-        public async Task Time(DateTime getTime, string getTimeTZ = null)
+        public async Task Time(string getTime = null, string ampm = null, string getTimeTZ = null)
         {
+            DateTime outputTimeParse;
+            DateTime.TryParse(getTime, out outputTimeParse);
+            string timeFormat_Time = "HH:mm tt";
+            if (ampm == "am" || ampm == "pm")
+            {
+                timeFormat_Time = "hh:mm tt";
+                await ReplyAsync(outputTimeParse.ToString(timeFormat_Time, CultureInfo.CreateSpecificCulture("en-US")));
+            }
 
         }
     }

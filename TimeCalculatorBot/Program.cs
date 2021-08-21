@@ -26,7 +26,7 @@ namespace TimeCalculatorBot
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-            string token = "BOT TOKEN HERE";
+            string token = "";
 
             _client.Log += _client_Log;
 
