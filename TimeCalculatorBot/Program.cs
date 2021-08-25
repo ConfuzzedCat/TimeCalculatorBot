@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using System.Resources;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
