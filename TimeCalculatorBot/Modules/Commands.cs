@@ -509,7 +509,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                        .WithText("!time time");
+                                        .WithText("!time time HH:mm tz");
                                 });
                             Embed embed_default = EmbedBuilder_default.Build();
 
@@ -551,7 +551,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time time HH:mm tz am");
                                 });
                             Embed embed_bst = EmbedBuilder_bst.Build();
                             await ReplyAsync(embed: embed_bst);
@@ -584,7 +584,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time time HH:mm tz am");
                                 });
                             Embed embed_cest = EmbedBuilder_cest.Build();
                             await ReplyAsync(embed: embed_cest);
@@ -617,7 +617,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time time HH:mm tz am");
                                 });
                             Embed embed_cet = EmbedBuilder_cet.Build();
                             await ReplyAsync(embed: embed_cet);
@@ -650,7 +650,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time time HH:mm tz am");
                                 });
                             Embed embed_utc = EmbedBuilder_utc.Build();
                             await ReplyAsync(embed: embed_utc);
@@ -683,7 +683,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time time HH:mm tz am");
                                 });
                             Embed embed_est = EmbedBuilder_est.Build();
                             await ReplyAsync(embed: embed_est);
@@ -716,7 +716,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time time HH:mm tz am");
                                 });
                             Embed embed_aest = EmbedBuilder_aest.Build();
                             await ReplyAsync(embed: embed_aest);
@@ -749,7 +749,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time time HH:mm tz am");
                                 });
                             Embed embed_ist = EmbedBuilder_ist.Build();
                             await ReplyAsync(embed: embed_ist);
@@ -782,7 +782,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time time HH:mm tz am");
                                 });
                             Embed embed_pst = EmbedBuilder_pst.Build();
                             await ReplyAsync(embed: embed_pst);
@@ -815,7 +815,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time time HH:mm tz am");
                                 });
                             Embed embed_pdt = EmbedBuilder_pdt.Build();
                             await ReplyAsync(embed: embed_pdt);
@@ -848,7 +848,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time time HH:mm tz am");
                                 });
                             Embed embed_gmt = EmbedBuilder_gmt.Build();
                             await ReplyAsync(embed: embed_gmt);
@@ -861,7 +861,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                        .WithText("!time time");
+                                    .WithText("!time time HH:mm tz am");
                                 });
                             Embed embed_default = EmbedBuilder_default.Build();
 
@@ -875,8 +875,8 @@ namespace TimeCalculatorBot.Modules
             {
                 await ReplyAsync("Invaild time format, needs to like this '13:45 cet' and 24 hours.");
             }
-            
-             
+
+
 
         }
 
@@ -884,6 +884,7 @@ namespace TimeCalculatorBot.Modules
         public async Task Utc(string utcTime = null, double utcOffset = 0, string ampm = null)
         {
             if (utcTime != null) utcTime.ToLower();
+            if (ampm != null) ampm.ToLower();
             DateTime outputTimeParse;
             string timeformat = "HH:mm tt";
             string utcOffsetString;
@@ -894,14 +895,67 @@ namespace TimeCalculatorBot.Modules
             {
                 utcOffsetString = utcOffset.ToString();
             }
+
+            string bstString = "British Summer Time";
+            string cestString = "Central European Summer Time";
+            string cetString = "Central European Time";
+            string utcString = "UTC/Coordinated Universal Time";
+            string estString = "Eastern Standard Time";
+            string aestString = "Australian Eastern Standard Time";
+            string istString = "India Standard Time";
+            string pstString = "Pacific Standard Time";
+            string pdtString = "Pacific Daylight Time";
+            string gmtString = "Greenwich Mean Time";
+            double bstOffset = 1;
+            double cestOffset = 2;
+            double cetOffest = 1;
+            double estOffset = -4;
+            double aestoffest = 10;
+            double istOffset = 5;
+            double pstOffset = -8;
+            double pdtOffset = -7;
+            double gmtOffset = 0;
+
+            if (utcOffset == bstOffset) bstOffset = utcOffset;
+            if (utcOffset == cestOffset) cestOffset = utcOffset;
+            if (utcOffset == cetOffest) cetOffest = utcOffset;
+            if (utcOffset == estOffset) estOffset = utcOffset;
+            if (utcOffset == aestoffest) aestoffest = utcOffset;
+            if (utcOffset == istOffset) istOffset = utcOffset;
+            if (utcOffset == pstOffset) pstOffset = utcOffset;
+            if (utcOffset == pdtOffset) pdtOffset = utcOffset;
+
             if (DateTime.TryParse(utcTime, out outputTimeParse))
             {
+                DateTime bstTimeTemp = outputTimeParse.AddHours(bstOffset);
+                DateTime cestTimeTemp = outputTimeParse.AddHours(cestOffset);
+                DateTime cetTimeTemp = outputTimeParse.AddHours(cetOffest);
+                DateTime estTimeTemp = outputTimeParse.AddHours(estOffset);
+                DateTime aestTimeTemp = outputTimeParse.AddHours(aestoffest);
+                DateTime istTimeTemp = outputTimeParse.AddHours(istOffset);
+                DateTime pstTimeTemp = outputTimeParse.AddHours(pstOffset);
+                DateTime pdtTimeTemp = outputTimeParse.AddHours(pdtOffset);
+
+
                 if (ampm != "am" || ampm != "pm")
                 {
                     timeformat = "HH:mm tt";
                     string utcWithOffset = outputTimeParse.AddHours(utcOffset).ToString(timeformat);
+
+                    string bstTime = bstTimeTemp.ToString(timeformat);
+                    string cestTime = cestTimeTemp.ToString(timeformat);
+                    string cetTime = cetTimeTemp.ToString(timeformat);
+                    string estTime = estTimeTemp.ToString(timeformat);
+                    string aestTime = aestTimeTemp.ToString(timeformat);
+                    string istTime = istTimeTemp.ToString(timeformat);
+                    string pstTime = pstTimeTemp.ToString(timeformat);
+                    string pdtTime = pdtTimeTemp.ToString(timeformat);
+                    string gmtTime = outputTimeParse.ToString(timeformat);
+
+
+
                     var EmbedBuilder = new EmbedBuilder()
-                        .WithDescription($"{utcTime} is {utcWithOffset} at UTC{utcOffsetString}")
+                        .WithDescription($"{utcTime} is {utcWithOffset} at UTC{utcOffsetString}\n({bstTime}) - {bstString}.\n({cestTime}) - {cestString}\n({cetTime}) - {cetString}\n({utcTime}) - {utcString}\n({estTime}) - {estString}\n({aestTime}) - {aestString}\n({istTime}) - {istString}\n({pdtTime}) - {pdtString}\n({utcTime}) - {gmtString}")
                         .WithFooter(footer =>
                         {
                             footer
@@ -915,12 +969,22 @@ namespace TimeCalculatorBot.Modules
                 {
                     timeformat = "hh:mm tt";
                     string utcWithOffset = outputTimeParse.AddHours(utcOffset).ToString(timeformat, CultureInfo.CreateSpecificCulture("en-US"));
+                    string bstTime = bstTimeTemp.ToString(timeformat, CultureInfo.CreateSpecificCulture("en-US"));
+                    string cestTime = cestTimeTemp.ToString(timeformat, CultureInfo.CreateSpecificCulture("en-US"));
+                    string cetTime = cetTimeTemp.ToString(timeformat, CultureInfo.CreateSpecificCulture("en-US"));
+                    string estTime = estTimeTemp.ToString(timeformat, CultureInfo.CreateSpecificCulture("en-US"));
+                    string aestTime = aestTimeTemp.ToString(timeformat, CultureInfo.CreateSpecificCulture("en-US"));
+                    string istTime = istTimeTemp.ToString(timeformat, CultureInfo.CreateSpecificCulture("en-US"));
+                    string pstTime = pstTimeTemp.ToString(timeformat, CultureInfo.CreateSpecificCulture("en-US"));
+                    string pdtTime = pdtTimeTemp.ToString(timeformat, CultureInfo.CreateSpecificCulture("en-US"));
+                    string gmtTime = outputTimeParse.ToString(timeformat, CultureInfo.CreateSpecificCulture("en-US"));
+                    
                     var EmbedBuilder = new EmbedBuilder()
-                        .WithDescription($"{utcTime} is {utcWithOffset} at UTC{utcOffsetString}")
+                        .WithDescription($"{utcTime} is {utcWithOffset} at UTC{utcOffsetString}\n({bstTime}) - {bstString}.\n({cestTime}) - {cestString}\n({cetTime}) - {cetString}\n({utcTime}) - {utcString}\n({estTime}) - {estString}\n({aestTime}) - {aestString}\n({istTime}) - {istString}\n({pdtTime}) - {pdtString}\n({gmtTime}) - {gmtString}")
                         .WithFooter(footer =>
                         {
                             footer
-                            .WithText("!time utc HH:mm offset");
+                            .WithText("!time utc HH:mm offset am");
                         });
                     Embed embed = EmbedBuilder.Build();
                     if (Context.Message.Content.StartsWith("!time ")) await Context.Message.DeleteAsync();
@@ -932,6 +996,6 @@ namespace TimeCalculatorBot.Modules
                 await ReplyAsync("Invaild time format, needs to like this '13:45 -3' and 24 hours.");
             }
 
-        } // this needs to be like the command above, utc instead.
+        } // should be fixed now
     }
 }
