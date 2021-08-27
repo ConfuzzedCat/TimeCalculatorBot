@@ -43,7 +43,28 @@ namespace TimeCalculatorBot.Modules
             string bstTZString = bstTZ.ToString(timeFormat);
             string bstTZString1 = "British Summer Time";
 
-            //To add: AEST, IST, AKDT, ARE, PST, GMT! and automatic...
+            DateTime aestTZ = DateTime.UtcNow.AddHours(10);
+            string aestTZString = aestTZ.ToString(timeFormat);
+            string aestTZString1 = "Australian Eastern Standard Time";
+
+            DateTime istTZ = DateTime.UtcNow.AddHours(5);
+            istTZ.AddMinutes(30);
+            string istTZString = istTZ.ToString(timeFormat);
+            string istTZString1 = "India Standard Time";
+
+            DateTime pstTZ = DateTime.UtcNow.AddHours(-8);
+            string pstTZString = pstTZ.ToString(timeFormat);
+            string pstTZString1 = "Pacific Standard Time";
+
+            DateTime pdtTZ = DateTime.UtcNow.AddHours(-7);
+            string pdtTZString = pdtTZ.ToString(timeFormat);
+            string pdtTZString1 = "Pacific Daylight Time";
+
+            DateTime gmtTZ = DateTime.UtcNow.AddHours(0);
+            string gmtTZString = gmtTZ.ToString(timeFormat);
+            string gmtTZString1 = "Greenwich Mean Time";
+
+            //To add: AEST, IST, PST, PDT, GMT! and automatic...
 
 
 
@@ -63,7 +84,7 @@ namespace TimeCalculatorBot.Modules
                 } else
                 {
                     var EmbedBuilder = new EmbedBuilder()
-                        .WithDescription($"({cestTZString}) - {cestTZString1}.\n({cetTZString}) - {cetTZString1}\n({bstTZString}) - {bstTZString1}\n({localUTCString}) - {localUTCString1}\n({estTZString}) - {estTZString1}")
+                        .WithDescription($"({cestTZString}) - {cestTZString1}.\n({cetTZString}) - {cetTZString1}.\n({bstTZString}) - {bstTZString1}.\n({localUTCString}) - {localUTCString1}.\n({estTZString}) - {estTZString1}.\n({aestTZString}) - {aestTZString1}.\n({istTZString}) - {istTZString1}.\n({pstTZString}) - {pstTZString1}.\n({pdtTZString}) - {pdtTZString1}.\n({gmtTZString}) - {gmtTZString1}.")
                         .WithFooter(footer =>
                             {
                                 footer
@@ -102,9 +123,14 @@ namespace TimeCalculatorBot.Modules
                     localUTCString = localUTC.ToString(timeFormat, CultureInfo.CreateSpecificCulture("en-US"));
                     estTZString = estTZ.ToString(timeFormat, CultureInfo.CreateSpecificCulture("en-US"));
                     bstTZString = bstTZ.ToString(timeFormat, CultureInfo.CreateSpecificCulture("en-US"));
+                    aestTZString = aestTZ.ToString(timeFormat, CultureInfo.CreateSpecificCulture("en-US"));
+                    istTZString = istTZ.ToString(timeFormat, CultureInfo.CreateSpecificCulture("en-US"));
+                    pstTZString = pstTZ.ToString(timeFormat, CultureInfo.CreateSpecificCulture("en-US"));
+                    pdtTZString = pdtTZ.ToString(timeFormat, CultureInfo.CreateSpecificCulture("en-US")); 
+                    gmtTZString = gmtTZ.ToString(timeFormat, CultureInfo.CreateSpecificCulture("en-US"));
 
                     var EmbedBuilder = new EmbedBuilder()
-                        .WithDescription($"({cestTZString}) - {cestTZString1}.\n({cetTZString}) - {cetTZString1}\n({bstTZString}) - {bstTZString1}\n({localUTCString}) - {localUTCString1}\n({estTZString}) - {estTZString1}")
+                        .WithDescription($"({cestTZString}) - {cestTZString1}.\n({cetTZString}) - {cetTZString1}.\n({bstTZString}) - {bstTZString1}.\n({localUTCString}) - {localUTCString1}.\n({estTZString}) - {estTZString1}.\n({aestTZString}) - {aestTZString1}.\n({istTZString}) - {istTZString1}.\n({pstTZString}) - {pstTZString1}.\n({pdtTZString}) - {pdtTZString1}.\n({gmtTZString}) - {gmtTZString1}.")
                         .WithFooter(footer =>
                         {
                             footer
@@ -997,5 +1023,98 @@ namespace TimeCalculatorBot.Modules
             }
 
         } // should be fixed now
+
+        [Command("help")]
+        public async Task Help(string command)
+        {
+            if(command != null) command.ToLower();
+            switch (command)
+            {
+                case "now":
+                    var EmbedBuilder_now = new EmbedBuilder()
+                        .WithDescription("[Now]\nNow sends a embed with the current time in different time zones.\nEx. !time now 12hours Eastern Standard Time.\n{Subcommands}\n'12', '12h', '12hour', '12hours', '12-hour', '12-hours', 'am', 'pm' or '24h' - 'Time Zone Id'.")
+                        .WithFooter(footer =>
+                        {
+                            footer
+                            .WithText("!time help now");
+                        });
+                    Embed embed_now = EmbedBuilder_now.Build();
+
+                    if (Context.Message.Content.StartsWith("!time ")) await Context.Message.DeleteAsync();
+                    await ReplyAsync(embed: embed_now);
+                    break;
+
+                case "time":
+                    var EmbedBuilder_time = new EmbedBuilder()
+                        .WithDescription("[Time]\nTime tries to parse the time given (formatted like this 23:38) in the given timezone, and outputs a embed showing what the time is other time zone compared to the given time zone.\nEx. !time time 13:21 cet\n{Subcommands}\n'bst', 'cest', 'cet', 'utc', 'est', 'aest', 'ist', 'pst', 'pdt' or 'gmt' - 'am' or 'pm'.")
+                        .WithFooter(footer =>
+                        {
+                            footer
+                            .WithText("!time help time");
+                        });
+                    Embed embed_time = EmbedBuilder_time.Build();
+
+                    if (Context.Message.Content.StartsWith("!time ")) await Context.Message.DeleteAsync();
+                    await ReplyAsync(embed: embed_time);
+                    break;
+
+                case "utc":
+                    var EmbedBuilder_utc = new EmbedBuilder()
+                        .WithDescription("[UTC]\nUTC tries and parse a given time and offset to find a UTC+x(or -x) time and compares it to other time zones.\nEx. !time utc 13:02 -6 pm\n{Subcommands}\n'am' or 'pm'.")
+                        .WithFooter(footer =>
+                        {
+                            footer
+                            .WithText("!time help utc");
+                        }); 
+                    Embed embed_utc = EmbedBuilder_utc.Build();
+
+                    if (Context.Message.Content.StartsWith("!time ")) await Context.Message.DeleteAsync();
+                    await ReplyAsync(embed: embed_utc);
+                    break;
+
+                case "ping":
+                    var EmbedBuilder_ping = new EmbedBuilder()
+                        .WithDescription("[Ping]\nPong.\nEx. !time ping\n{Subcommands}\nNone.")
+                        .WithFooter(footer =>
+                        {
+                            footer
+                            .WithText("!time help Ping");
+                        });
+                    Embed embed_ping = EmbedBuilder_ping.Build();
+
+                    if (Context.Message.Content.StartsWith("!time ")) await Context.Message.DeleteAsync();
+                    await ReplyAsync(embed: embed_ping);
+                    break;
+
+                case "easter egg":
+                    if (Context.Message.Content.StartsWith("!time ")) await Context.Message.DeleteAsync();
+                    await ReplyAsync("Not done with easter eggs... not that I would tell if there were... :shushing_face:");
+                    break;
+
+                default:
+                    var EmbedBuilder_help = new EmbedBuilder()
+                        .WithDescription("Command list\nInfo - All commands has a 12 hour variant, just do am or pm in the end\n- Now (!time now 24h/12h timezoneid - !time now - !time now am Eastern Standard Time)\n- Time (!time time HH:mm tz am/pm - !time time 15:32 cest am)\n- Utc (!time utc HH:mm offset am/pm - !time utc 23:51 -3)\n- Ping - Pong\n Maybe some easter eggs :shushing_face:")
+                        .WithFooter(footer =>
+                        {
+                            footer
+                            .WithText("!time help");
+
+                        });
+                    Embed embed_help = EmbedBuilder_help.Build();
+
+                    if (Context.Message.Content.StartsWith("!time ")) await Context.Message.DeleteAsync();
+                    await ReplyAsync(embed: embed_help);
+                    break;            
+            }
+                
+        }
+
+        [Command("SUPERSECRETINTRODUCTIONCOMMAND")]
+        public async Task Intro()
+        {
+            if (Context.Message.Content.StartsWith("!time ")) await Context.Message.DeleteAsync();
+            await ReplyAsync("Hello, Im TimeCalculator, a bot made by @confuzzedcat with the help of headpats. When I'm not offline, I will help you with finding out time btween time zones. To start do '!time help'.");
+
+        }
     }
 }
