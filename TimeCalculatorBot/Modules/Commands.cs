@@ -1113,7 +1113,7 @@ namespace TimeCalculatorBot.Modules
         public async Task Intro()
         {
             if (Context.Message.Content.StartsWith("!time ")) await Context.Message.DeleteAsync();
-            await ReplyAsync("Hello, Im TimeCalculator, a bot made by @confuzzedcat with the help of headpats. When I'm not offline, I will help you with finding out time btween time zones. To start do '!time help'.");
+            await ReplyAsync("Hello, Im TimeCalculator, a bot made by @ConfuzzedCat with the help of headpats. When I'm not offline, I will help you with finding out time btween time zones. To start do '!time help'. Also if something is broken send it to @ConfuzzedCat");
 
         }
     }
