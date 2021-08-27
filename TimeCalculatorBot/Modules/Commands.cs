@@ -980,7 +980,7 @@ namespace TimeCalculatorBot.Modules
 
 
                     var EmbedBuilder = new EmbedBuilder()
-                        .WithDescription($"{utcTime} is {utcWithOffset} at UTC{utcOffsetString}\n({bstTime}) - {bstString}.\n({cestTime}) - {cestString}\n({cetTime}) - {cetString}\n({utcTime}) - {utcString}\n({estTime}) - {estString}\n({aestTime}) - {aestString}\n({istTime}) - {istString}\n({pdtTime}) - {pdtString}\n({utcTime}) - {gmtString}")
+                        .WithDescription($"{utcTime} is {utcWithOffset} at UTC{utcOffsetString}.\n({bstTime}) - {bstString}.\n({cestTime}) - {cestString}.\n({cetTime}) - {cetString}.\n({utcTime}) - {utcString}.\n({estTime}) - {estString}.\n({aestTime}) - {aestString}.\n({istTime}) - {istString}.\n({pstTime}) - {pstString}.\n({pdtTime}) - {pdtString}.\n({utcTime}) - {gmtString}.")
                         .WithFooter(footer =>
                         {
                             footer
