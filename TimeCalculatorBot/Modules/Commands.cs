@@ -22,7 +22,7 @@ namespace TimeCalculatorBot.Modules
         {
             if (convert != null) convert.ToLower();
             var message = Context.Message.Content;
-            string timeFormat = "HH:mm tt";
+            string timeFormat = "HH:mm";
             DateTime cetTZ = DateTime.UtcNow.AddHours(1);
             string cetTZString = cetTZ.ToString(timeFormat);
             string cetTZString1 = "Central European Time";
@@ -195,7 +195,7 @@ namespace TimeCalculatorBot.Modules
                 string gmtTime;
                 if (ampm != "am" || ampm != "pm" || ampm == null)
                 {
-                    timeFormat_Time = "HH:mm tt";
+                    timeFormat_Time = "HH:mm";
 
                     switch (getTimeTZ)
                     {
@@ -912,7 +912,7 @@ namespace TimeCalculatorBot.Modules
             if (utcTime != null) utcTime.ToLower();
             if (ampm != null) ampm.ToLower();
             DateTime outputTimeParse;
-            string timeformat = "HH:mm tt";
+            string timeformat = "HH:mm";
             string utcOffsetString;
             if (utcOffset > 0)
             {
