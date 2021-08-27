@@ -940,7 +940,6 @@ namespace TimeCalculatorBot.Modules
             double istOffset = 5;
             double pstOffset = -8;
             double pdtOffset = -7;
-            double gmtOffset = 0;
 
             if (utcOffset == bstOffset) bstOffset = utcOffset;
             if (utcOffset == cestOffset) cestOffset = utcOffset;
