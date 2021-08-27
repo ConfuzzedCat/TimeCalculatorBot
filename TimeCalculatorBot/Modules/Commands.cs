@@ -1025,7 +1025,7 @@ namespace TimeCalculatorBot.Modules
         } // should be fixed now
 
         [Command("help")]
-        public async Task Help(string command)
+        public async Task Help(string command = null)
         {
             if(command != null) command.ToLower();
             switch (command)
@@ -1091,6 +1091,20 @@ namespace TimeCalculatorBot.Modules
                     await ReplyAsync("Not done with easter eggs... not that I would tell if there were... :shushing_face:");
                     break;
 
+                case null:
+                    var EmbedBuilder_null = new EmbedBuilder()
+                        .WithDescription("Command list\nInfo - All commands has a 12 hour variant, just do am or pm in the end\n- Now (!time now 24h/12h timezoneid - !time now - !time now am Eastern Standard Time)\n- Time (!time time HH:mm tz am/pm - !time time 15:32 cest am)\n- Utc (!time utc HH:mm offset am/pm - !time utc 23:51 -3)\n- Ping - Pong\n Maybe some easter eggs :shushing_face:")
+                        .WithFooter(footer =>
+                        {
+                            footer
+                            .WithText("!time help");
+
+                        });
+                    Embed embed_null = EmbedBuilder_null.Build();
+
+                    if (Context.Message.Content.StartsWith("!time ")) await Context.Message.DeleteAsync();
+                    await ReplyAsync(embed: embed_null);
+                    break;
                 default:
                     var EmbedBuilder_help = new EmbedBuilder()
                         .WithDescription("Command list\nInfo - All commands has a 12 hour variant, just do am or pm in the end\n- Now (!time now 24h/12h timezoneid - !time now - !time now am Eastern Standard Time)\n- Time (!time time HH:mm tz am/pm - !time time 15:32 cest am)\n- Utc (!time utc HH:mm offset am/pm - !time utc 23:51 -3)\n- Ping - Pong\n Maybe some easter eggs :shushing_face:")
@@ -1104,9 +1118,10 @@ namespace TimeCalculatorBot.Modules
 
                     if (Context.Message.Content.StartsWith("!time ")) await Context.Message.DeleteAsync();
                     await ReplyAsync(embed: embed_help);
-                    break;            
+                    break;
             }
-                
+        
+
         }
 
         [Command("SUPERSECRETINTRODUCTIONCOMMAND")]
