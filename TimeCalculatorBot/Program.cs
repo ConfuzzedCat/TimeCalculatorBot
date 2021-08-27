@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
@@ -28,7 +29,15 @@ namespace TimeCalculatorBot
 
 
             
-            string token = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + @"\Bot.Token");
+            string token;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                token = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + @"/Bot.Token");
+            } else 
+            {
+                token = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + @"\Bot.Token");
+            }
+            
 
             _client.Log += _client_Log;
 
