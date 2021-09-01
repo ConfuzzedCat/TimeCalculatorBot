@@ -64,7 +64,13 @@ namespace TimeCalculatorBot.Modules
             string gmtTZString = gmtTZ.ToString(timeFormat);
             string gmtTZString1 = "Greenwich Mean Time";
 
-            //To add: AEST, IST, PST, PDT, GMT! and automatic...
+            //To do: automatic
+
+
+
+            var bstDaylightSavingTemp = "5/1";
+            DateTime bstDaylightSaving = DateTime.Parse(bstDaylightSavingTemp, CultureInfo.CreateSpecificCulture("dk-DK"));
+
 
 
 
@@ -151,8 +157,8 @@ namespace TimeCalculatorBot.Modules
             }
         }
 
-        [Command("time")]
-        public async Task Time(string getTime = null, string getTimeTZ = null, string ampm = null)
+        [Command("convert")]
+        public async Task Convert(string getTime = null, string getTimeTZ = null, string ampm = null)
         {
             if (getTimeTZ != null) getTimeTZ.ToLower();
             if (ampm != null) ampm.ToLower();
@@ -172,6 +178,20 @@ namespace TimeCalculatorBot.Modules
                 DateTime pstTimeTemp = outputTimeParse;
                 DateTime pdtTimeTemp = outputTimeParse;
                 DateTime gmtTimeTemp = outputTimeParse;
+                
+                
+                /*
+                var bstDaylightSavingTemp = "5/1";
+                DateTime bstDaylightSaving;
+                DateTime.TryParse(bstDaylightSavingTemp, out bstDaylightSaving);
+                if (DateTime.Now == bstDaylightSaving)
+                { 
+                    
+                } else if (DateTime.Now != bstDaylightSaving)
+                
+                 */
+
+
 
                 string bstString = "British Summer Time";
                 string cestString = "Central European Summer Time";
@@ -225,7 +245,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time convert HH:mm tz");
                                 });
                             Embed embed_bst = EmbedBuilder_bst.Build();
                             await ReplyAsync(embed: embed_bst);
@@ -258,7 +278,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time convert HH:mm tz");
                                 });
                             Embed embed_cest = EmbedBuilder_cest.Build();
                             await ReplyAsync(embed: embed_cest);
@@ -291,7 +311,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time convert HH:mm tz");
                                 });
                             Embed embed_cet = EmbedBuilder_cet.Build();
                             await ReplyAsync(embed: embed_cet);
@@ -324,7 +344,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time convert HH:mm tz");
                                 });
                             Embed embed_utc = EmbedBuilder_utc.Build();
                             await ReplyAsync(embed: embed_utc);
@@ -357,7 +377,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time convert HH:mm tz");
                                 });
                             Embed embed_est = EmbedBuilder_est.Build();
                             await ReplyAsync(embed: embed_est);
@@ -390,7 +410,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time convert HH:mm tz");
                                 });
                             Embed embed_aest = EmbedBuilder_aest.Build();
                             await ReplyAsync(embed: embed_aest);
@@ -423,7 +443,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time convert HH:mm tz");
                                 });
                             Embed embed_ist = EmbedBuilder_ist.Build();
                             await ReplyAsync(embed: embed_ist);
@@ -456,7 +476,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time convert HH:mm tz");
                                 });
                             Embed embed_pst = EmbedBuilder_pst.Build();
                             await ReplyAsync(embed: embed_pst);
@@ -489,7 +509,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time convert HH:mm tz");
                                 });
                             Embed embed_pdt = EmbedBuilder_pdt.Build();
                             await ReplyAsync(embed: embed_pdt);
@@ -522,7 +542,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz");
+                                    .WithText("!time convert HH:mm tz");
                                 });
                             Embed embed_gmt = EmbedBuilder_gmt.Build();
                             await ReplyAsync(embed: embed_gmt);
@@ -535,7 +555,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                        .WithText("!time time HH:mm tz");
+                                        .WithText("!time convert HH:mm tz");
                                 });
                             Embed embed_default = EmbedBuilder_default.Build();
 
@@ -577,7 +597,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz am");
+                                    .WithText("!time convert HH:mm tz am");
                                 });
                             Embed embed_bst = EmbedBuilder_bst.Build();
                             await ReplyAsync(embed: embed_bst);
@@ -610,7 +630,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz am");
+                                    .WithText("!time convert HH:mm tz am");
                                 });
                             Embed embed_cest = EmbedBuilder_cest.Build();
                             await ReplyAsync(embed: embed_cest);
@@ -643,7 +663,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz am");
+                                    .WithText("!time convert HH:mm tz am");
                                 });
                             Embed embed_cet = EmbedBuilder_cet.Build();
                             await ReplyAsync(embed: embed_cet);
@@ -676,7 +696,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz am");
+                                    .WithText("!time convert HH:mm tz am");
                                 });
                             Embed embed_utc = EmbedBuilder_utc.Build();
                             await ReplyAsync(embed: embed_utc);
@@ -709,7 +729,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz am");
+                                    .WithText("!time convert HH:mm tz am");
                                 });
                             Embed embed_est = EmbedBuilder_est.Build();
                             await ReplyAsync(embed: embed_est);
@@ -742,7 +762,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz am");
+                                    .WithText("!time convert HH:mm tz am");
                                 });
                             Embed embed_aest = EmbedBuilder_aest.Build();
                             await ReplyAsync(embed: embed_aest);
@@ -775,7 +795,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz am");
+                                    .WithText("!time convert HH:mm tz am");
                                 });
                             Embed embed_ist = EmbedBuilder_ist.Build();
                             await ReplyAsync(embed: embed_ist);
@@ -808,7 +828,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz am");
+                                    .WithText("!time convert HH:mm tz am");
                                 });
                             Embed embed_pst = EmbedBuilder_pst.Build();
                             await ReplyAsync(embed: embed_pst);
@@ -841,7 +861,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz am");
+                                    .WithText("!time convert HH:mm tz am");
                                 });
                             Embed embed_pdt = EmbedBuilder_pdt.Build();
                             await ReplyAsync(embed: embed_pdt);
@@ -874,7 +894,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz am");
+                                    .WithText("!time convert HH:mm tz am");
                                 });
                             Embed embed_gmt = EmbedBuilder_gmt.Build();
                             await ReplyAsync(embed: embed_gmt);
@@ -887,7 +907,7 @@ namespace TimeCalculatorBot.Modules
                                 .WithFooter(footer =>
                                 {
                                     footer
-                                    .WithText("!time time HH:mm tz am");
+                                    .WithText("!time convert HH:mm tz am");
                                 });
                             Embed embed_default = EmbedBuilder_default.Build();
 
@@ -921,7 +941,7 @@ namespace TimeCalculatorBot.Modules
             {
                 utcOffsetString = utcOffset.ToString();
             }
-
+            
             string bstString = "British Summer Time";
             string cestString = "Central European Summer Time";
             string cetString = "Central European Time";
@@ -1043,13 +1063,13 @@ namespace TimeCalculatorBot.Modules
                     await ReplyAsync(embed: embed_now);
                     break;
 
-                case "time":
+                case "convert":
                     var EmbedBuilder_time = new EmbedBuilder()
-                        .WithDescription("[Time]\nTime tries to parse the time given (formatted like this 23:38) in the given timezone, and outputs a embed showing what the time is other time zone compared to the given time zone.\nEx. !time time 13:21 cet\n{Subcommands}\n'bst', 'cest', 'cet', 'utc', 'est', 'aest', 'ist', 'pst', 'pdt' or 'gmt' - 'am' or 'pm'.")
+                        .WithDescription("[convert]\nTime tries to parse the time given (formatted like this 23:38) in the given timezone, and outputs a embed showing what the time is other time zone compared to the given time zone.\nEx. !time convert 13:21 cet\n{Subcommands}\n'bst', 'cest', 'cet', 'utc', 'est', 'aest', 'ist', 'pst', 'pdt' or 'gmt' - 'am' or 'pm'.")
                         .WithFooter(footer =>
                         {
                             footer
-                            .WithText("!time help time");
+                            .WithText("!time help convert");
                         });
                     Embed embed_time = EmbedBuilder_time.Build();
 
@@ -1130,5 +1150,6 @@ namespace TimeCalculatorBot.Modules
             await ReplyAsync("Hello, Im TimeCalculator, a bot made by @ConfuzzedCat with the help of headpats. When I'm not offline, I will help you with finding out time btween time zones. To start do '!time help'. Also if something is broken send it to @ConfuzzedCat");
 
         }
+
     }
 }
