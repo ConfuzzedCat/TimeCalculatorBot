@@ -30,12 +30,12 @@ namespace TimeCalculatorBot
 
             
             string token;
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-            {
-                token = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + @"/Bot.Token");
-            } else 
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 token = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + @"\Bot.Token");
+            } else 
+            {
+                token = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + @"/Bot.Token");
             }
             
 
@@ -77,6 +77,25 @@ namespace TimeCalculatorBot
                 var result = await _commands.ExecuteAsync(context, argPos, _services);
                 if (!result.IsSuccess) Console.WriteLine(result.ErrorReason);
                 if (result.Error.Equals(CommandError.UnmetPrecondition)) await message.Channel.SendMessageAsync(result.ErrorReason);
+            }
+        }
+
+
+        private async Task DawsonIsHorny(SocketGuild arg)
+        {
+            //IGuildUser dawson = 695978166807691325;
+
+
+            if (arg.Id == 747512696756502599)
+            {
+                SocketGuildUser dawson = arg.Owner;
+                var HornyRole = arg.GetRole(884193395965296672);
+                
+                
+                if (dawson.Id == 695978166807691325)
+                {
+                    dawson.AddRoleAsync(HornyRole);
+                }                
             }
         }
     }
